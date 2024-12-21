@@ -1,0 +1,100 @@
+		public class TrainParams
+	{
+		public bool Cubic { get; set; }
+		public int CubicFastLevel { get; set; }
+		public int MaxInteractions { get; set; }
+		public int SelfInteractions { get; set; }
+		public int MaxFuncs { get; set; }
+		public int C { get; set; }
+		public int AllowLinear { get; set; }
+		public int UseMinSpan { get; set; }
+		public int EndSpanAdjust { get; set; }
+		public int FastK { get; set; }
+		public int FastBeta { get; set; }
+		public int FastH { get; set; }
+		public int[,] NoInteract { get; set; } // 2D matrix for interactions
+		public int[,] YesInteract { get; set; }
+		public int[] ForceLinear { get; set; }
+		public bool Prune { get; set; }
+		public bool TerminateWhenInfGCV { get; set; }
+		public double Threshold { get; set; }
+		public int NewVarPenalty { get; set; }
+		public int MaxFinalFuncs { get; set; }
+		public int UseEndSpan { get; set; }
+
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		public TrainParams()
+		{
+			this.MaxFuncs =  12;
+			this.C = -1;
+			this.Cubic = false;
+			this.CubicFastLevel = 2;
+			this.SelfInteractions = 1;
+			this.MaxInteractions = 1;
+			this.Threshold = 1e-4;
+			this.Prune = true;
+			this.FastK = 10;
+			this.FastBeta = 0;
+			this.FastH = 1;
+			this.UseMinSpan = -1;
+			this.UseEndSpan = -1;
+			this.MaxFinalFuncs = int.MaxValue;
+			this.EndSpanAdjust = 1;
+			this.NewVarPenalty = 0;
+			this.TerminateWhenInfGCV = false;
+			this.YesInteract = null;
+			this.NoInteract = null;
+			this.AllowLinear = 0;
+			this.ForceLinear = new int[0];
+		}
+	}
+
+
+	public class Model
+	{
+		public double MSE { get; set; }
+		public double GCV { get; set; }
+		public double[] Coefs { get; set; }
+		public List<object> KnotDims  { get; set; }
+		public List<object> KnotSites { get; set; }
+		public List<object> KnotDirs  { get; set; }
+		public List<int> Parents { get; set; }
+		public TrainParams TrainParams { get; set; }
+		public double[] MinX { get; set; }
+		public double[] MaxX { get; set; }
+		public bool[] IsBinary { get; set; }
+		public double[,] X { get; set; } // Input data matrix
+		public double[] t1 { get; set; }
+		public double[] t2 { get; set; }
+	}
+
+	public class DataEval
+	{
+		public double[] Y { get; set; } // Output vector
+		public double[,] X { get; set; } // Input matrix
+		public double[] Weights { get; set; }
+	}
+
+	public class EvaluationResults
+	{
+		public bool[] UsedVars { get; set; }
+		public double[] MSEtest { get; set; }
+		public double[] MSE { get; set; }
+		public double[] R2 { get; set; }
+		public double[] GCV { get; set; }
+		public double[] R2GCV { get; set; }
+		public double[] R2test { get; set; }
+	}
+
+	public class FastParent
+	{
+		public int IdxStart { get; set; }
+		public int IdxEnd { get; set; }
+		public int IterComputedAllDims { get; set; }
+		public int BestDim { get; set; }
+		public int BestIdxInList { get; set; }
+		public double BestErr { get; set; }
+	}
+
